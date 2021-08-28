@@ -1,14 +1,16 @@
 <template>
-  <Header />
-  <RouterView />
+  <Headline />
+  <Search />
 </template>
 
 <script>
-import Header from '~/components/Header'
+import Headline from '~/components/Headline'
+import Search from '~/components/Search'
 
 export default {
   components: {
-    Header
+    Headline,
+    Search
   }
 }
 </script>
