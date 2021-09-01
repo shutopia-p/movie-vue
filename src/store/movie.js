@@ -1,4 +1,6 @@
 import axios from 'axios'
+import uniqBy from 'lodash/uniqBy'
+import _uniqBy from 'lodash/uniqBy'
 
 export default {
   namespaced: true,
@@ -23,7 +25,7 @@ export default {
       const res = await axios.get(`http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}&type=${type}&y=${year}&page=1`)
       const { Search, totalResults } = res.data
       commit('updateState', {
-        movies: Search
+        movies: _uniqBy(Search, 'imdbID')
       })
 
       //추가요청
@@ -38,7 +40,7 @@ export default {
           commit('updateState', {
             movies: [
               ...state.movies,
-              ...Search
+              ...uniqBy(Search, 'imdbID')
             ]
           })
         }
